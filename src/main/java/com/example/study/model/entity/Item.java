@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.criterion.Order;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -18,12 +19,25 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String status;
+
     private String name;
 
-    private Integer price;
+    private String title;
 
     private String content;
 
+    private Integer price;
+
+    private String brandName;
+
+    private LocalDateTime registeredAt;
+
+    private LocalDateTime unregisteredAt;
+
+    private LocalDateTime createdAt;
+
+    private String createdBy;
     // 1 : N
     // LAZY = 지연로딩 , EAGER = 즉시로딩
 
@@ -31,6 +45,6 @@ public class Item {
 
     // EAGER = 1:1
     // JOIN item item0_ left outer join order_detail orderdetai1_ on item0_.id=orderdetai1_.item_id left outer join user user2_ on orderdetai1_.user_id=user2_.id where item0_.id=?
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
-    private List<OrderDetail> orderDetailList;
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
+    //private List<OrderDetail> orderDetailList;
 }
