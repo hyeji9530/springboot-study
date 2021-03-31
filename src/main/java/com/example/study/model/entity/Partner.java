@@ -41,4 +41,6 @@ public class Partner {
     private LocalDateTime createdAt;
 
     private String createdBy;
+
+    private Long categoryId;
 }
