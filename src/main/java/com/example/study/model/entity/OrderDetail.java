@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity // order_detail
-//@ToString(exclude = {"user","item"})
+@ToString(exclude = {"orderGroup"})
 public class OrderDetail {
 
     @Id
@@ -38,13 +38,8 @@ public class OrderDetail {
 
     private Long itemId;
 
-    private Long orderGroupId;
+    // OrderDetail N : 1 OrderGroup
+    @ManyToOne
+    private OrderGroup orderGroup;
 
-    // N : 1
-    //@ManyToOne
-    //private User user; // user_id
-
-    // N : 1
-    //@ManyToOne
-    //private Item item;
 }
