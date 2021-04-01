@@ -23,7 +23,7 @@ public class OrderGroup {
 
     private String status;
 
-    private String drderType; // 주문의 형태 - 일괄 / 개별
+    private String orderType; // 주문의 형태 - 일괄 / 개별
 
     private String revAddress;
 
@@ -46,4 +46,6 @@ public class OrderGroup {
     private LocalDateTime updatedAt;
 
     private String updatedBy;
+
+    private Long userId;
 }
