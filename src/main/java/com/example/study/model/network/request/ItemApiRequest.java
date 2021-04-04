@@ -1,6 +1,5 @@
 package com.example.study.model.network.request;
 
-import jdk.vm.ci.meta.Local;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
