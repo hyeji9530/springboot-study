@@ -51,7 +51,7 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
         // 1. request data
         UserApiRequest userApiRequest = request.getData();
 
-        Header<UserApiResponse> header = userApiLogicService.read(userApiRequest.getId());
+        Header<UserApiResponse> header = userApiLogicService.read2(userApiRequest.getEmail());
         if(header.getResultCode()=="데이터 없음") {
             User user = User.builder()
                     .account(userApiRequest.getAccount())
@@ -86,6 +86,16 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
                         ()->Header.ERROR("데이터 없음")
                 );
     }
+
+    public Header<UserApiResponse> read2(String email) {
+
+        return userRepository.findByEmail(email)
+                .map(user -> response(user))
+                .orElseGet(
+                        ()->Header.ERROR("데이터 없음")
+                );
+    }
+
 
     @Override
     public Header<UserApiResponse> update(Header<UserApiRequest> request) {
