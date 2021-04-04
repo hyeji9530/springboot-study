@@ -7,6 +7,7 @@ import com.example.study.model.network.request.UserApiRequest;
 import com.example.study.model.network.response.UserApiResponse;
 import com.example.study.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,9 @@ import java.util.Optional;
 
 @Service
 public class UserApiLogicService implements CrudInterface<UserApiRequest, UserApiResponse> {
+
+    @Autowired
+    UserApiLogicService userApiLogicService;
 
     @Autowired
     private UserRepository userRepository;
@@ -40,6 +44,28 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
         // 3. 생성된 데이터 -> userApiResponse return
         return response(newUser);
+    }
+
+    public Header<UserApiResponse> create2(Header<UserApiRequest> request) {
+
+        // 1. request data
+        UserApiRequest userApiRequest = request.getData();
+
+        Header<UserApiResponse> header = userApiLogicService.read(userApiRequest.getId());
+        if(header.getResultCode()=="데이터 없음") {
+            User user = User.builder()
+                    .account(userApiRequest.getAccount())
+                    .password(userApiRequest.getPassword())
+                    .status("REGISTERED")
+                    .phoneNumber(userApiRequest.getPhoneNumber())
+                    .email(userApiRequest.getEmail())
+                    .registeredAt(LocalDateTime.now())
+                    .build();
+            User newUser = userRepository.save(user);
+            return response(newUser);
+        } else {
+            return Header.ERROR("409 Conflict");
+        }
     }
 
     @Override
