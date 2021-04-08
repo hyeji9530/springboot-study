@@ -50,8 +50,8 @@ public class OrderGroupApiLogicService implements CrudInterface<OrderGroupApiReq
                 /*.map(orderGroup -> {
                     return response(orderGroup);
                 })*/
-                //.map(orderGroup -> response(orderGroup))
-                .map(this::response)
+                .map(orderGroup -> response(orderGroup))
+                //.map(this::response)
                 .orElseGet(()->Header.ERROR("데이터 없음"));
     }
 
