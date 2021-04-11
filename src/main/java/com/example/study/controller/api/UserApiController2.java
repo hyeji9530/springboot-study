@@ -23,7 +23,8 @@ public class UserApiController2 implements CrudInterface<UserApiRequest, UserApi
     @PostMapping("")
     public Header<UserApiResponse> create(Header<UserApiRequest> request) {
         log.info("{}",request);
-        return userApiLogicService.create2(request);
+        //return userApiLogicService.create2(request);
+        return null;
     }
 
     @Override
